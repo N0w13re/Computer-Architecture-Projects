@@ -1,13 +1,19 @@
 `timescale 1ns / 1ps
 
 
-module  RV32core(
+  module  RV32core(
         input debug_en,  // debug enable
         input debug_step,  // debug step clock
         input [6:0] debug_addr,  // debug address
         output[31:0] debug_data,  // debug data
         input clk,  // main clock
-        input rst,  // synchronous reset
+        input rst,  // synchronous reset 
+
+        output[31:0] wb_pc,
+        output[31:0] wb_inst,
+        output[31:0] mem_addr,
+        output[31:0] mem_data,
+
         input interrupter  // interrupt source, for future use
     );
 
@@ -55,7 +61,7 @@ module  RV32core(
     
     add_32 add_IF(.a(PC_IF),.b(32'd4),.c(PC_4_IF));
 
-    MUX2T1_32 mux_IF(.I0(),.I1(),.s(),.o());        //to fill sth. in ()
+    MUX2T1_32 mux_IF(.I0(PC_4_IF),.I1(jump_PC_ID),.s(Branch_ctrl),.o(next_PC_IF));        //to fill sth. in ()
 
     ROM_D inst_rom(.a(PC_IF[8:2]),.spo(inst_IF));
 
@@ -79,11 +85,11 @@ module  RV32core(
     
     ImmGen imm_gen(.ImmSel(ImmSel_ctrl),.inst_field(inst_ID),.Imm_out(Imm_out_ID));
     
-    MUX4T1_32 mux_forward_A(.I0(),.I1(),.I2(),.I3(),        //to fill sth. in ()
-        .s(),.o());
+    MUX4T1_32 mux_forward_A(.I0(rs1_data_reg),.I1(ALUout_EXE),.I2(ALUout_MEM),.I3(Datain_MEM),        //to fill sth. in ()
+        .s(forward_ctrl_A),.o(rs1_data_ID));
     
-    MUX4T1_32 mux_forward_B(.I0(),.I1(),.I2(),.I3(),        //to fill sth. in ()
-        .s(),.o());
+    MUX4T1_32 mux_forward_B(.I0(rs2_data_reg),.I1(ALUout_EXE),.I2(ALUout_MEM),.I3(Datain_MEM),        //to fill sth. in ()
+        .s(forward_ctrl_B),.o(rs2_data_ID));
     
     MUX2T1_32 mux_branch_ID(.I0(PC_ID),.I1(rs1_data_ID),.s(JALR),.o(addA_ID));
 
@@ -114,14 +120,14 @@ module  RV32core(
         .DatatoReg_EX(DatatoReg_EXE),.RegWrite_EX(RegWrite_EXE),.WR_EX(mem_w_EXE),
         .u_b_h_w_EX(u_b_h_w_EXE),.MIO_EX(MIO_EXE));
     
-    MUX2T1_32 mux_A_EXE(.I0(),.I1(),.s(),.o());     //to fill sth. in ()
+    MUX2T1_32 mux_A_EXE(.I0(rs1_data_EXE),.I1(PC_EXE),.s(ALUSrc_A_EXE),.o(ALUA_EXE));     //to fill sth. in ()
 
-    MUX2T1_32 mux_B_EXE(.I0(),.I1(),.s(),.o());       //to fill sth. in ()
+    MUX2T1_32 mux_B_EXE(.I0(rs2_data_EXE),.I1(Imm_EXE),.s(ALUSrc_B_EXE),.o(ALUB_EXE));       //to fill sth. in ()
 
     ALU alu(.A(ALUA_EXE),.B(ALUB_EXE),.Control(ALUControl_EXE),
         .res(ALUout_EXE),.zero(ALUzero_EXE),.overflow(ALUoverflow_EXE));
     
-   MUX2T1_32 mux_forward_EXE(.I0(),.I1(),.s(),.o());        //to fill sth. in ()
+   MUX2T1_32 mux_forward_EXE(.I0(rs2_data_EXE),.I1(Datain_MEM),.s(forward_ctrl_ls),.o(Dataout_EXE));        //to fill sth. in ()
 
 
     // MEM
@@ -152,6 +158,11 @@ module  RV32core(
     wire [31:0] Test_signal;
     assign debug_data = debug_addr[5] ? Test_signal : Debug_regs;
     
+    assign wb_inst = inst_WB;
+    assign wb_pc = PC_WB;
+    assign mem_addr = MIO_MEM ? ALUout_MEM : 32'hFFFFFFFF ;
+    assign mem_data = MIO_MEM ? Datain_MEM : 32'hAA55AA55 ;
+
     CPUTEST    U1_3(.PC_IF(PC_IF),
                     .PC_ID(PC_ID),
                     .PC_EXE(PC_EXE),

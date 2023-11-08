@@ -1,0 +1,27 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Tue Oct 10 11:39:43 2023
+# Process ID: 22780
+# Current directory: D:/Projects/arch-fa23/src/lab1/Exp1_NEXYS_A7
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10176 D:\Projects\arch-fa23\src\lab1\Exp1_NEXYS_A7\Exp1.xpr
+# Log file: D:/Projects/arch-fa23/src/lab1/Exp1_NEXYS_A7/vivado.log
+# Journal file: D:/Projects/arch-fa23/src/lab1/Exp1_NEXYS_A7\vivado.jou
+#-----------------------------------------------------------
+start_gui
+exit
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 10 11:42:39 2023...
+[Project 1-313] Project file moved from 'C:/Users/Zonghui Wang/Desktop/risc v/code/Exp1' since last save.
+Scanning sources...
+Finished scanning sources
+INFO: [Project 1-230] Project 'Exp1.xpr' upgraded for this version of Vivado.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/Xilinx/Vivado/2020.2/data/ip'.
+ERROR: [Vivado 12-106] *** Exception: java.lang.NullPointerException (See D:/Projects/arch-fa23/src/lab1/Exp1_NEXYS_A7/vivado_pid26116.debug)
+open_project: Time (s): cpu = 00:00:55 ; elapsed = 00:00:33 . Memory (MB): peak = 923.793 ; gain = 0.000
+ERROR: [Common 17-39] 'open_project' failed due to earlier errors.
+update_compile_order -fileset sources_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 10 11:42:52 2023...
