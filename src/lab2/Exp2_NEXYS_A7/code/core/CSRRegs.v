@@ -7,7 +7,33 @@ module CSRRegs(
     input csr_w,
     input[1:0] csr_wsc_mode,
     output[31:0] rdata,
-    output[31:0] mstatus
+    output[31:0] mstatus,
+
+    input trap,
+    input mret,
+    input[31:0] mepc,
+    input[31:0] mcause,
+    input[31:0] mtval,
+    
+    output[31:0] mtvec,
+    output[31:0] mepc_ret,
+
+    output[31:0] csr0,
+    output[31:0] csr1,
+    output[31:0] csr2,
+    output[31:0] csr3,
+    output[31:0] csr4,
+    output[31:0] csr5,
+    output[31:0] csr6,
+    output[31:0] csr7,
+    output[31:0] csr8,
+    output[31:0] csr9,
+    output[31:0] csr10,
+    output[31:0] csr11,
+    output[31:0] csr12,
+    output[31:0] csr13,
+    output[31:0] csr14,
+    output[31:0] csr15
 );
     // You may need to modify this module for better efficiency
     
@@ -20,6 +46,8 @@ module CSRRegs(
     wire[3:0] waddr_map = (waddr[6] << 3) + waddr[2:0];
 
     assign mstatus = CSR[0];
+    assign mtvec = CSR[5];
+    assign mepc_ret = CSR[9];
 
     assign rdata = CSR[raddr_map];
 
@@ -50,5 +78,38 @@ module CSRRegs(
                 default: CSR[waddr_map] = wdata;
             endcase            
         end
+        else if(trap) begin     // 发生trap时，更改mstatus, mepc, mcause, mtval (mtvec固定为0)
+            CSR[0][7] <= CSR[0][3];     // 先前的MIE值保留到MPIE位中
+            CSR[0][3] <= 0;             // MIE位置零以禁用中断
+            CSR[0][12:11] <= 2'b11;     // 将发生异常之前的权限模式保留在mstatus的MPP域中
+            CSR[9] <= mepc;
+            CSR[10] <= mcause;
+            CSR[11] <= mtval;
+        end
+        else if(mret) begin     // 退出trap
+            CSR[0][3] <= CSR[0][7];     // 恢复先前MIE值
+            CSR[0][7] <= 0;
+            CSR[0][12:11] <= 2'b00;
+            CSR[9] <= 0;                // 清空mepc, mcause, mtval
+            CSR[10] <= 0;
+            CSR[11] <= 0;
+        end
     end
+
+    assign csr0 = CSR[0];
+    assign csr1 = CSR[1];
+    assign csr2 = CSR[2];
+    assign csr3 = CSR[3];
+    assign csr4 = CSR[4];
+    assign csr5 = CSR[5];
+    assign csr6 = CSR[6];
+    assign csr7 = CSR[7];
+    assign csr8 = CSR[8];
+    assign csr9 = CSR[9];
+    assign csr10 = CSR[10];
+    assign csr11 = CSR[11];
+    assign csr12 = CSR[12];
+    assign csr13 = CSR[13];
+    assign csr14 = CSR[14];
+    assign csr15 = CSR[15];
 endmodule
