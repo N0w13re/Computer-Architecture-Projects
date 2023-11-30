@@ -67,13 +67,21 @@ module  RV32core(
     wire[4:0] rd_WB;
     wire [31:0] wt_data_WB, PC_WB, inst_WB, ALUout_WB, Datain_WB;
 
+    wire[31:0] PC_B, PC1, PC_refetch;
+    wire taken, refetch, J_B;
 
     // IF
     REG32 REG_PC(.clk(debug_clk),.rst(rst),.CE(PC_EN_IF),.D(next_PC_IF),.Q(PC_IF));
     
     add_32 add_IF(.a(PC_IF),.b(32'd4),.c(PC_4_IF));
 
-    MUX2T1_32 mux_IF(.I0(PC_4_IF),.I1(jump_PC_ID),.s(Branch_ctrl),.o(next_PC_IF));        
+    BranchPrediction BP(.clk(debug_clk), .rst(rst), .PC_IF(PC_IF), .PC_ID(PC_ID),
+        .J_B(J_B), .Branch_ctrl(Branch_ctrl), .jump_PC_ID(jump_PC_ID), .Data_stall(reg_FD_stall),
+        .taken(taken), .PC_B(PC_B), .refetch(refetch), .PC_refetch(PC_refetch));     // 新添BranchPrediction模块
+
+    MUX2T1_32 mux1(.I0(PC_4_IF), .I1(PC_B), .s(taken), .o(PC1));    // 如果taken==1，则采取BTB中地址
+
+    MUX2T1_32 mux_IF(.I0(PC1),.I1(PC_refetch),.s(refetch),.o(next_PC_IF));      // 如果refetch==1，则采取PC_refetch地址
 
     ROM_D inst_rom(.a(PC_IF[9:2]),.spo(inst_IF));
 
@@ -89,7 +97,7 @@ module  RV32core(
         .mem_w(mem_w_ctrl),.mem_r(mem_r_ctrl),.rs1use(rs1use_ctrl),.rs2use(rs2use_ctrl),
         .hazard_optype(hazard_optype_ctrl),.ImmSel(ImmSel_ctrl),.cmp_ctrl(cmp_ctrl),
         .ALUControl(ALUControl_ctrl),.JALR(JALR),.MRET(MRET),.csr_rw(csr_rw_ctrl),
-        .csr_w_imm_mux(csr_w_imm_mux_ctrl),.exp_vector(exp_vector_ctrl));
+        .csr_w_imm_mux(csr_w_imm_mux_ctrl),.exp_vector(exp_vector_ctrl), .J_B(J_B));    // 加了J_B输出
     
     Regs register(.clk(debug_clk),.rst(rst),.L_S(RegWrite_WB),
         .R_addr_A(inst_ID[19:15]),.R_addr_B(inst_ID[24:20]),
@@ -111,12 +119,12 @@ module  RV32core(
 
     cmp_32 cmp_ID(.a(rs1_data_ID),.b(rs2_data_ID),.ctrl(cmp_ctrl),.c(cmp_res_ID));
     
-    HazardDetectionUnit hazard_unit(.clk(debug_clk),.Branch_ID(Branch_ctrl),.rs1use_ID(rs1use_ctrl),
+    HazardDetectionUnit hazard_unit(.clk(debug_clk),.Branch_ID(refetch),.rs1use_ID(rs1use_ctrl),
         .rs2use_ID(rs2use_ctrl),.hazard_optype_ID(hazard_optype_ctrl),.rd_EXE(rd_EXE),
         .rd_MEM(rd_MEM),.rs1_ID(inst_ID[19:15]),.rs2_ID(inst_ID[24:20]),.rs2_EXE(rs2_EXE),
         .PC_EN_IF(PC_EN_IF),.reg_FD_stall(reg_FD_stall),.reg_FD_flush(reg_FD_flush),
         .reg_DE_flush(reg_DE_flush),.forward_ctrl_ls(forward_ctrl_ls),.forward_ctrl_A(forward_ctrl_A),
-        .forward_ctrl_B(forward_ctrl_B));
+        .forward_ctrl_B(forward_ctrl_B));       // 更改了Branch_ID的输入为refetch，因为Branch_ctrl==1时未必需要flush，此时的决定权应该在refetch手上
 
 
     // EX

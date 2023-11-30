@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "E:/TA/MY/Exp3_NEXYS_A7/Exp2.runs/synth_1/top.tcl"
+  variable script "D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/Exp2.runs/synth_1/top.tcl"
   variable category "vivado_synth"
 }
 
@@ -70,6 +70,7 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
+set_param chipscope.maxJobs 2
 set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-1
@@ -77,44 +78,45 @@ create_project -in_memory -part xc7a100tcsg324-1
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir E:/TA/MY/Exp3_NEXYS_A7/Exp2.cache/wt [current_project]
-set_property parent.project_path E:/TA/MY/Exp3_NEXYS_A7/Exp2.xpr [current_project]
+set_property webtalk.parent_dir D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/Exp2.cache/wt [current_project]
+set_property parent.project_path D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/Exp2.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo e:/TA/MY/Exp3_NEXYS_A7/Exp2.cache/ip [current_project]
+set_property ip_output_repo d:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/Exp2.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_verilog E:/TA/MY/Exp3_NEXYS_A7/code/auxillary/function.vh
+read_verilog D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/auxillary/function.vh
 read_verilog -library xil_defaultlib {
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/ALU.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/auxillary/CPUTEST.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/CtrlUnit.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/HazardDetectionUnit.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/ImmGen.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/common/MUX2T1_32.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/common/MUX4T1_32.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/RAM_B.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/common/REG32.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/REG_EX_MEM.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/REG_ID_EX.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/REG_IF_ID.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/REG_MEM_WB.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/ROM_D.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/RV32core.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/core/Regs.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/common/add_32.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/auxillary/btn_scan.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/common/cmp_32.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/auxillary/debug_clk.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/auxillary/debug_ctrl.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/auxillary/display.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/auxillary/my_clk_gen.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/auxillary/parallel2serial.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/auxillary/uart_buffer.v
-  E:/TA/MY/Exp3_NEXYS_A7/code/auxillary/top.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/ALU.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/BranchPrediction.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/auxillary/CPUTEST.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/CtrlUnit.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/HazardDetectionUnit.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/ImmGen.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/common/MUX2T1_32.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/common/MUX4T1_32.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/RAM_B.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/common/REG32.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/REG_EX_MEM.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/REG_ID_EX.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/REG_IF_ID.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/REG_MEM_WB.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/ROM_D.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/RV32core.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/Regs.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/common/add_32.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/auxillary/btn_scan.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/common/cmp_32.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/auxillary/debug_clk.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/auxillary/debug_ctrl.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/auxillary/display.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/auxillary/my_clk_gen.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/auxillary/parallel2serial.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/auxillary/uart_buffer.v
+  D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/auxillary/top.v
 }
-read_vhdl -library xil_defaultlib E:/TA/MY/Exp3_NEXYS_A7/code/auxillary/UART_TX_CTRL.vhd
+read_vhdl -library xil_defaultlib D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/auxillary/UART_TX_CTRL.vhd
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -124,8 +126,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc E:/TA/MY/Exp3_NEXYS_A7/code/constraint.xdc
-set_property used_in_implementation false [get_files E:/TA/MY/Exp3_NEXYS_A7/code/constraint.xdc]
+read_xdc D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/constraint.xdc
+set_property used_in_implementation false [get_files D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/constraint.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]

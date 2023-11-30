@@ -1,6 +1,7 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  --include "../../../../code/auxillary" \
 "../../../../code/core/ALU.v" \
+"../../../../code/core/BranchPrediction.v" \
 "../../../../code/auxillary/CPUTEST.v" \
 "../../../../code/core/CtrlUnit.v" \
 "../../../../code/core/HazardDetectionUnit.v" \

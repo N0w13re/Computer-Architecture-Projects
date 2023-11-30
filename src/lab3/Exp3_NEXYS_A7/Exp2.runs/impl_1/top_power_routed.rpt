@@ -1,8 +1,8 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Wed Nov  8 19:34:22 2023
-| Host             : DESKTOP-KRA9R9O running 64-bit major release  (build 9200)
+| Date             : Thu Nov 30 16:42:54 2023
+| Host             : MyT14 running 64-bit major release  (build 9200)
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
 | Device           : xc7a100tcsg324-1
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.214        |
+| Total On-Chip Power (W)  | 0.225        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.116        |
+| Dynamic (W)              | 0.127        |
 | Device Static (W)        | 0.097        |
 | Effective TJA (C/W)      | 4.6          |
 | Max Ambient (C)          | 84.0         |
@@ -52,19 +52,19 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.005 |        6 |       --- |             --- |
-| Slice Logic    |     0.001 |    23585 |       --- |             --- |
-|   LUT as Logic |    <0.001 |    13804 |     63400 |           21.77 |
-|   CARRY4       |    <0.001 |       82 |     15850 |            0.52 |
-|   Register     |    <0.001 |     6097 |    126800 |            4.81 |
-|   F7/F8 Muxes  |    <0.001 |     2572 |     63400 |            4.06 |
-|   Others       |     0.000 |       31 |       --- |             --- |
+| Clocks         |     0.008 |        6 |       --- |             --- |
+| Slice Logic    |     0.002 |    58533 |       --- |             --- |
+|   LUT as Logic |     0.002 |    24789 |     63400 |           39.10 |
+|   CARRY4       |    <0.001 |       93 |     15850 |            0.59 |
+|   Register     |    <0.001 |    23280 |    126800 |           18.36 |
+|   F7/F8 Muxes  |    <0.001 |     9084 |     63400 |           14.33 |
+|   Others       |     0.000 |       34 |       --- |             --- |
 |   BUFG         |     0.000 |        1 |        32 |            3.13 |
-| Signals        |     0.001 |    13909 |       --- |             --- |
+| Signals        |     0.008 |    34863 |       --- |             --- |
 | MMCM           |     0.106 |        1 |         6 |           16.67 |
 | I/O            |     0.004 |       65 |       210 |           30.95 |
 | Static Power   |     0.097 |          |           |                 |
-| Total          |     0.214 |          |           |                 |
+| Total          |     0.225 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.023 |       0.007 |      0.015 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.033 |       0.018 |      0.015 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.077 |       0.059 |      0.018 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.005 |       0.001 |      0.004 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -143,14 +143,15 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+----------------+-----------+
-| Name           | Power (W) |
-+----------------+-----------+
-| top            |     0.116 |
-|   CLK_GEN      |     0.107 |
-|   core         |     0.003 |
-|     data_ram   |     0.001 |
-|   uart_tx_ctrl |     0.001 |
-+----------------+-----------+
++-------------------+-----------+
+| Name              | Power (W) |
++-------------------+-----------+
+| top               |     0.127 |
+|   CLK_GEN         |     0.107 |
+|   core            |     0.014 |
+|     BP            |     0.004 |
+|     add_branch_ID |     0.006 |
+|   uart_tx_ctrl    |     0.001 |
++-------------------+-----------+
 
 

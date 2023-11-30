@@ -1,12 +1,12 @@
 Vivado Simulator 2020.2
 Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
-Running: E:/vivado/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto bd08de18f65a4fff898ed77aa59a84cb --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot core_sim_behav xil_defaultlib.core_sim xil_defaultlib.glbl -log elaborate.log 
+Running: D:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto bd08de18f65a4fff898ed77aa59a84cb --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot core_sim_behav xil_defaultlib.core_sim xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 2 for port 'PCSource' [E:/TA/arch-fa23_/src/lab3/Exp3_NEXYS_A7/code/core/RV32core.v:227]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'Addr' [E:/TA/arch-fa23_/src/lab3/Exp3_NEXYS_A7/code/core/RV32core.v:240]
-WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 2 for port 'DatatoReg' [E:/TA/arch-fa23_/src/lab3/Exp3_NEXYS_A7/code/core/RV32core.v:244]
+WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 2 for port 'PCSource' [D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/RV32core.v:235]
+WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 32 for port 'Addr' [D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/RV32core.v:248]
+WARNING: [VRFC 10-3091] actual bit length 1 differs from formal bit length 2 for port 'DatatoReg' [D:/Projects/arch-fa23/src/lab3/Exp3_NEXYS_A7/code/core/RV32core.v:252]
 Completed static elaboration
 Starting simulation data flow analysis
 Completed simulation data flow analysis
@@ -14,6 +14,7 @@ Time Resolution for simulation is 1ps
 Compiling module xil_defaultlib.debug_clk
 Compiling module xil_defaultlib.REG32
 Compiling module xil_defaultlib.add_32
+Compiling module xil_defaultlib.BranchPrediction
 Compiling module xil_defaultlib.MUX2T1_32
 Compiling module xil_defaultlib.ROM_D
 Compiling module xil_defaultlib.REG_IF_ID

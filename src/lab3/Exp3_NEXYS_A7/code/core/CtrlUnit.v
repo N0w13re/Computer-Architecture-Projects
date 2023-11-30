@@ -5,7 +5,7 @@ module CtrlUnit(
     input[31:0] inst,
     input cmp_res,
     output Branch, ALUSrc_A, ALUSrc_B, DatatoReg, RegWrite, mem_w,
-        mem_r, rs1use, rs2use,
+        mem_r, rs1use, rs2use, J_B,
     output [1:0] hazard_optype,
     output [2:0] ImmSel, cmp_ctrl,
     output [3:0] ALUControl,
@@ -102,6 +102,7 @@ module CtrlUnit(
 
 
     assign Branch = JAL | JALR | B_valid & cmp_res;
+    assign J_B = JAL | JALR | B_valid;
 
     localparam Imm_type_I = 3'b001;
     localparam Imm_type_B = 3'b010;
