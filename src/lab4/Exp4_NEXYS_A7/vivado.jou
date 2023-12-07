@@ -1,0 +1,129 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu Dec  7 00:05:16 2023
+# Process ID: 35196
+# Current directory: D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent25908 D:\Projects\arch-fa23\src\lab4\Exp4_NEXYS_A7\Exp4.xpr
+# Log file: D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/vivado.log
+# Journal file: D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/Exp4.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+launch_simulation
+open_wave_config D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/code/cache/wave/sim_top_behav.wcfg
+source sim_top.tcl
+reset_run synth_1
+reset_run ROM_D_synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+run all
+close_sim
+open_hw_manager
+connect_hw_server -allow_non_jtag
+open_hw_target
+set_property PROGRAM.FILE {D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/Exp4.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+current_hw_device [get_hw_devices xc7a100t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a100t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/Exp4.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]
+launch_simulation
+open_wave_config D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/code/cache/wave/sim_top_behav.wcfg
+source sim_top.tcl
+launch_simulation -simset [get_filesets sim_2 ]
+open_wave_config D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/code/sim/core_sim_behav.wcfg
+source core_sim.tcl
+current_sim simulation_2
+close_sim
+launch_simulation
+launch_simulation
+launch_simulation
+relaunch_sim
+launch_simulation
+open_wave_config D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/code/cache/wave/sim_top_behav.wcfg
+source sim_top.tcl
+run all
+relaunch_sim
+run 3 us
+close_sim
+launch_simulation
+open_wave_config D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/code/cache/wave/sim_top_behav.wcfg
+source sim_top.tcl
+run 2 us
+current_sim simulation_3
+close_sim
+launch_simulation -simset [get_filesets sim_2 ]
+open_wave_config D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/code/sim/core_sim_behav.wcfg
+source core_sim.tcl
+disconnect_hw_server localhost:3121
+connect_hw_server -allow_non_jtag
+open_hw_target
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/Exp4.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]
+current_wave_config {core_sim_behav.wcfg}
+add_wave {{/core_sim/core/CMU}} 
+relaunch_sim
+relaunch_sim
+relaunch_sim
+close_sim
+close_sim
+launch_simulation -simset [get_filesets sim_2 ]
+open_wave_config D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/code/sim/core_sim_behav.wcfg
+source core_sim.tcl
+current_wave_config {core_sim_behav.wcfg}
+add_wave {{/core_sim/core/CMU}} 
+relaunch_sim
+close_sim
+launch_simulation -simset [get_filesets sim_2 ]
+open_wave_config D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/code/sim/core_sim_behav.wcfg
+source core_sim.tcl
+current_wave_config {core_sim_behav.wcfg}
+add_wave {{/core_sim/core/register}} 
+relaunch_sim
+run 2 us
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+disconnect_hw_server localhost:3121
+connect_hw_server -allow_non_jtag
+open_hw_target
+set_property PROGRAM.FILE {D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/Exp4.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+current_hw_device [get_hw_devices xc7a100t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a100t_0] 0]
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/Exp4.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]
+launch_simulation
+open_wave_config D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/code/cache/wave/sim_top_behav.wcfg
+source sim_top.tcl
+set_property PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a100t_0]
+set_property PROGRAM.FILE {D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/Exp4.runs/impl_1/top.bit} [get_hw_devices xc7a100t_0]
+program_hw_devices [get_hw_devices xc7a100t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a100t_0] 0]
+run 2 us
+current_sim simulation_8
+close_sim
+launch_simulation -simset [get_filesets sim_2 ]
+relaunch_sim
+close_sim
+launch_simulation -simset [get_filesets sim_2 ]
+open_wave_config D:/Projects/arch-fa23/src/lab4/Exp4_NEXYS_A7/code/sim/core_sim_behav.wcfg
+source core_sim.tcl
+run 2 us
+current_wave_config {core_sim_behav.wcfg}
+add_wave {{/core_sim/core/register}} 
+relaunch_sim
+close_sim
