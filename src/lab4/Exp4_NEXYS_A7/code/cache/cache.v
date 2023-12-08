@@ -65,7 +65,7 @@ module cache (
     assign word2 = inner_data[addr_word2];                //need to fill in
     // 根据addr_word以及addr中byte字段的信息取出half word(2 bytes)
     assign half_word1 = addr[1] ? word1[31:16] : word1[15:0];
-    assign half_word2 = addr[2] ? word2[31:16] : word2[15:0];           //need to fill in
+    assign half_word2 = addr[1] ? word2[31:16] : word2[15:0];           //need to fill in
     // 类似地，取出byte
     assign byte1 = addr[1] ?
                     addr[0] ? word1[31:24] : word1[23:16] :
